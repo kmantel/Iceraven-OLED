@@ -20,7 +20,7 @@ jobs:
         id: this_repo_latest_release
         uses: cardinalby/git-get-release-action@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           latest: true
           # Optional: You might want to specify a repository if it's not the current one,
@@ -90,7 +90,7 @@ jobs:
         if: steps.version_check.outputs.NEW_VERSION_AVAILABLE == 'true'
         uses: softprops/action-gh-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.get_upstream_release.outputs.ICERAVEN_VERSION }}
           name: IceRaven Dark Theme ${{ steps.get_upstream_release.outputs.ICERAVEN_VERSION }}
