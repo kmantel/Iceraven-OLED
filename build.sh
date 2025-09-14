@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+set -x
 
 # Decompile with Apktool (decode resources + classes)
 wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.12.0.jar -O apktool.jar
@@ -46,3 +47,5 @@ zipalign 4 iceraven-patched.apk iceraven-patched-signed.apk
 
 # Clean up
 rm -rf iceraven-patched iceraven-patched.apk
+
+ls -la
