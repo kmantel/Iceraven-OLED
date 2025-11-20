@@ -22,6 +22,11 @@ sed -i 's/background-color: #1c1b22/background-color: #000000/g' iceraven-patche
 sed -i 's/mipmap\/ic_launcher_round/drawable\/ic_launcher_foreground/g' iceraven-patched/res/drawable/splash_screen.xml
 sed -i 's/160\.0dip/200\.0dip/g' iceraven-patched/res/drawable/splash_screen.xml
 
+# Remove animations
+for d in anim anim-ldrtl animator; do
+	find "$d" -name "*.xml" -exec sed -i 's;android:duration="(.*?)";android:duration="0";g' {} \;
+done
+
 
 color_subs=(
 	's/ff1c1b22/ff000000/g'
