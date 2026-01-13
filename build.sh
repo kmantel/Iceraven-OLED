@@ -21,6 +21,10 @@ sed -i 's/ff2b2a33/ff000000/g' iceraven-patched/smali*/mozilla/components/ui/col
 sed -i 's/ff42414d/ff15141a/g' iceraven-patched/smali*/mozilla/components/ui/colors/PhotonColors.smali
 sed -i 's/ff52525e/ff15141a/g' iceraven-patched/smali*/mozilla/components/ui/colors/PhotonColors.smali
 
+# drawable patching
+sed -i 's/mipmap\/ic_launcher_round/drawable\/ic_launcher_foreground/g' patched/res/drawable-v23/splash_screen.xml
+sed -i 's/160\.0dip/200\.0dip/g' patched/res/drawable-v23/splash_screen.xml
+
 # Recompile the APK
 java -jar apktool.jar b iceraven-patched -o iceraven-patched.apk
 
