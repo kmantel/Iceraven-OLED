@@ -18,8 +18,6 @@ sed -i 's/ff42414d/ff15141a/g' iceraven-patched/smali*/mozilla/components/ui/col
 sed -i 's/ff52525e/ff15141a/g' iceraven-patched/smali*/mozilla/components/ui/colors/PhotonColors.smali
 sed -i 's/1c1b22/000000/g' iceraven-patched/assets/extensions/readerview/readerview.css
 sed -i 's/eeeeee/e3e3e3/g' iceraven-patched/assets/extensions/readerview/readerview.css
-sed -i 's/mipmap\/ic_launcher_round/drawable\/ic_launcher_foreground/g' iceraven-patched/res/drawable-v23/splash_screen.xml
-sed -i 's/160\.0dip/200\.0dip/g' iceraven-patched/res/drawable-v23/splash_screen.xml
 
 # Recompile the APK
 java -jar apktool.jar b iceraven-patched -o iceraven-patched.apk --use-aapt2
