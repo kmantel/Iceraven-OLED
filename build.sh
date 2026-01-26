@@ -1,13 +1,12 @@
 #!/bin/bash
-
 set -e
 
 # Decompile with Apktool (decode resources + classes)
 wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.12.0.jar -O apktool.jar
-java -jar apktool.jar d iceraven.apk -o iceraven-patched  # -s flag removed
-rm -rf iceraven-patched/META-INF
+java -jar apktool.jar d iceraven.apk -o iceraven-patched
 
 # Color patching
+rm -rf iceraven-patched/META-INF
 sed -i 's/<color name="fx_mobile_layer_color_1">.*/<color name="fx_mobile_layer_color_1">#ff000000<\/color>/g' iceraven-patched/res/values-night/colors.xml
 sed -i 's/<color name="fx_mobile_layer_color_2">.*/<color name="fx_mobile_layer_color_2">@color\/photonDarkGrey90<\/color>/g' iceraven-patched/res/values-night/colors.xml
 sed -i 's/<color name="fx_mobile_action_color_secondary">.*/<color name="fx_mobile_action_color_secondary">#ff25242b<\/color>/g' iceraven-patched/res/values-night/colors.xml
@@ -20,6 +19,10 @@ sed -i 's/ff1c1b22/ff15141a/g' iceraven-patched/smali*/mozilla/components/ui/col
 sed -i 's/ff2b2a33/ff000000/g' iceraven-patched/smali*/mozilla/components/ui/colors/PhotonColors.smali
 sed -i 's/ff42414d/ff15141a/g' iceraven-patched/smali*/mozilla/components/ui/colors/PhotonColors.smali
 sed -i 's/ff52525e/ff15141a/g' iceraven-patched/smali*/mozilla/components/ui/colors/PhotonColors.smali
+
+# drawable patching
+sed -i 's/mipmap\/ic_launcher_round/drawable\/ic_launcher_foreground/g' patched/res/drawable-v23/splash_screen.xml
+sed -i 's/160\.0dip/200\.0dip/g' patched/res/drawable-v23/splash_screen.xml
 
 # Recompile the APK
 java -jar apktool.jar b iceraven-patched -o iceraven-patched.apk
