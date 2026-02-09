@@ -4,11 +4,13 @@ set -e
 set -x
 
 # Decompile with Apktool (decode resources + classes)
-wget -q https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.12.0.jar -O apktool.jar
+wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.12.0/apktool_2.12.0.jar -O apktool.jar
 java -jar apktool.jar d iceraven.apk -o iceraven-patched  # -s flag removed
 rm -rf iceraven-patched/META-INF
 
 # Color patching
+sed -i 's/<color name="fx_mobile_surface">.*/<color name="fx_mobile_surface">#ff000000<\/color>/g' iceraven-patched/res/values-night/colors.xml
+sed -i 's/<color name="fx_mobile_background">.*/<color name="fx_mobile_background">#ff000000<\/color>/g' iceraven-patched/res/values-night/colors.xml
 sed -i 's/<color name="fx_mobile_layer_color_1">.*/<color name="fx_mobile_layer_color_1">#ff000000<\/color>/g' iceraven-patched/res/values-night/colors.xml
 sed -i 's/<color name="fx_mobile_layer_color_2">.*/<color name="fx_mobile_layer_color_2">@color\/photonDarkGrey90<\/color>/g' iceraven-patched/res/values-night/colors.xml
 sed -i 's/<color name="fx_mobile_action_color_secondary">.*/<color name="fx_mobile_action_color_secondary">#ff25242b<\/color>/g' iceraven-patched/res/values-night/colors.xml
@@ -45,7 +47,7 @@ rm -rf iceraven-patched/assets/extensions/ads
 
 
 # Recompile the APK
-java -jar apktool.jar b iceraven-patched -o iceraven-patched.apk
+java -jar apktool.jar b iceraven-patched -o iceraven-patched.apk --use-aapt2
 
 # Align and sign the APK
 zipalign 4 iceraven-patched.apk iceraven-patched-signed.apk
