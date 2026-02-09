@@ -59,7 +59,7 @@ rm -rf iceraven-patched/assets/extensions/ads
 java -jar "$apktool_fi" b iceraven-patched -o iceraven-patched.apk --use-aapt2
 
 # Align and sign the APK
-zipalign 4 iceraven-patched.apk iceraven-patched-signed.apk
+zipalign -f 4 iceraven-patched.apk iceraven-patched-signed.apk
 
 # Clean up
 rm -rf iceraven-patched iceraven-patched.apk
