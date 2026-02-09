@@ -24,8 +24,14 @@ sed -i 's/eeeeee/e3e3e3/g' iceraven-patched/assets/extensions/readerview/readerv
 # Error page background
 sed -i 's/--background-color: #15141a/--background-color: #000000/g' iceraven-patched/assets/low_and_medium_risk_error_style.css
 sed -i 's/background-color: #1c1b22/background-color: #000000/g' iceraven-patched/assets/extensions/readerview/readerview.css
-sed -i 's/mipmap\/ic_launcher_round/drawable\/ic_launcher_foreground/g' iceraven-patched/res/drawable/splash_screen.xml
-sed -i 's/160\.0dip/200\.0dip/g' iceraven-patched/res/drawable/splash_screen.xml
+
+function process_splash() {
+	sed -i 's/mipmap\/ic_launcher_round/drawable\/ic_launcher_foreground/g' "$1"
+	sed -i 's/160\.0dip/200\.0dip/g' "$1"
+}
+export -f process_splash
+
+find iceraven-patched/res/drawable -name "splash_screen*.xml" -exec bash -c 'process_splash "$1"' {} \;
 
 # Remove animations
 for d in anim anim-ldrtl animator; do
