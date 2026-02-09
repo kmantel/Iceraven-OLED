@@ -4,8 +4,11 @@ set -e
 set -x
 
 # Decompile with Apktool (decode resources + classes)
-wget -q https://github.com/iBotPeaches/Apktool/releases/download/v2.12.0/apktool_2.12.0.jar -O apktool.jar
-java -jar apktool.jar d iceraven.apk -o iceraven-patched  # -s flag removed
+APKTOOL_VERSION="${APKTOOL_VERSION:-2.11.0}"
+apktool_fi="apktool_$APKTOOL_VERSION.jar"
+[[ -f "$apktool_fi" ]] || wget -q "https://github.com/iBotPeaches/Apktool/releases/download/v$APKTOOL_VERSION/apktool_$APKTOOL_VERSION.jar" -O "$apktool_fi"
+
+java -jar "$apktool_fi" d iceraven.apk -o iceraven-patched || echo "already unpacked"  # -s flag removed
 rm -rf iceraven-patched/META-INF
 
 # Color patching
@@ -47,7 +50,7 @@ rm -rf iceraven-patched/assets/extensions/ads
 
 
 # Recompile the APK
-java -jar apktool.jar b iceraven-patched -o iceraven-patched.apk --use-aapt2
+java -jar "$apktool_fi" b iceraven-patched -o iceraven-patched.apk --use-aapt2
 
 # Align and sign the APK
 zipalign 4 iceraven-patched.apk iceraven-patched-signed.apk
