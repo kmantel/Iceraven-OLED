@@ -35,7 +35,7 @@ find iceraven-patched/res/drawable -name "splash_screen*.xml" -exec bash -c 'pro
 
 # Remove animations
 for d in anim anim-ldrtl animator; do
-	find "$d" -name "*.xml" -exec sed -i 's;android:duration="(.*?)";android:duration="0";g' {} \;
+	find iceraven-patched/res/"$d" -name "*.xml" -exec sed -r -i 's;android:duration="(.*?)";android:duration="0";g' {} \;
 done
 
 
