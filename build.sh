@@ -65,3 +65,7 @@ zipalign -f 4 iceraven-patched.apk iceraven-patched-signed.apk
 rm -rf iceraven-patched iceraven-patched.apk
 
 ls -la
+
+if [[ "$1" == "sign" ]]; then
+	apksigner sign --ks keystore.jks --ks-pass pass:"$KEYSTORE_PASSPHRASE" --key-pass pass:"$KEY_PASSWORD" iceraven-patched-signed.apk
+fi
