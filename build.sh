@@ -18,6 +18,7 @@ sed -i 's/<color name="fx_mobile_layer_color_1">.*/<color name="fx_mobile_layer_
 sed -i 's/<color name="fx_mobile_layer_color_2">.*/<color name="fx_mobile_layer_color_2">@color\/photonDarkGrey90<\/color>/g' iceraven-patched/res/values-night/colors.xml
 sed -i 's/<color name="fx_mobile_action_color_secondary">.*/<color name="fx_mobile_action_color_secondary">#ff25242b<\/color>/g' iceraven-patched/res/values-night/colors.xml
 sed -i 's/<color name="button_material_dark">.*/<color name="button_material_dark">#ff25242b<\/color>/g' iceraven-patched/res/values/colors.xml
+sed -i 's/<color name="design_snackbar_background_color">.*/<color name="design_snackbar_background_color">#ff121212<\/color>/g' iceraven-patched/res/values/colors.xml
 sed -i 's/1c1b22/000000/g' iceraven-patched/assets/extensions/readerview/readerview.css
 sed -i 's/eeeeee/e3e3e3/g' iceraven-patched/assets/extensions/readerview/readerview.css
 
